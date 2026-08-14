@@ -39,12 +39,14 @@ const server = http
         res.end();
         break;
       case 'POST':
+        console.info('★ POST開始 ★');
         let rawData = '';
         req
           .on('data', chunk => {
             rawData += chunk;
           })
           .on('end', () => {
+            console.info('★ POST 終わり ★');
             const answer = new URLSearchParams(rawData);//URLじゃなくてもname=%23%34&yaki-shabu=%35%13みたいなクエリ形式ならなんでもデコードしてオブジェクトにしてくれる。
             const body = `${answer.get('name')}さんは${answer.get('favorite')}に投票しました`;
             console.info(`[${now}] ${body}`);
